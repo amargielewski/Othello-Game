@@ -1,6 +1,5 @@
-import React from "react";
 import styled from "styled-components";
-import { GlobalStyle } from "./styles/GlobalStyle";
+import { ThemeProvider } from "./providers/theme";
 
 const StyledTitle = styled.h2`
   font-size: 40px;
@@ -9,10 +8,9 @@ const StyledTitle = styled.h2`
 
 function App() {
   return (
-    <div className="App">
-      <GlobalStyle />
+    <ThemeProvider>
       <StyledTitle>Othello Game</StyledTitle>
-    </div>
+    </ThemeProvider>
   );
 }
 
