@@ -7,6 +7,7 @@ ${ResetCss};
  *,
   body {
     font-family: "Oswald", sans-serif;
+    box-sizing: border-box;
   }
 
   body {
