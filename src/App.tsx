@@ -1,16 +1,22 @@
-import styled from "styled-components";
+import { MainLayout } from "./layout/MainLayout/MainLayout";
 import { ThemeProvider } from "./providers/theme";
-
-const StyledTitle = styled.h2`
-  font-size: 40px;
-  text-align: center;
-`;
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { MainPage } from "./pages/MainPage/MainPage";
+import { RulesPage } from "./pages/RulesPage/RulesPage";
+import { paths } from "./constants/paths";
 
 function App() {
   return (
-    <ThemeProvider>
-      <StyledTitle>Othello Game</StyledTitle>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider>
+        <MainLayout>
+          <Routes>
+            <Route path={paths.main} element={<MainPage />} />
+            <Route path={paths.rules} element={<RulesPage />} />
+          </Routes>
+        </MainLayout>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 
