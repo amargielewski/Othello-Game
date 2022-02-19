@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const StyledWrapper = styled.div`
@@ -27,19 +28,33 @@ export const StyledMenuContainer = styled.div`
   align-items: center;
 `;
 
-export const StyledTitle = styled.h2`
+export const StyledTitle = styled(Link)`
   font-size: 40px;
   font-weight: 700;
+  text-decoration: none;
+  color: #fafafa;
 `;
 
-export const StyledMenuLink = styled(Link)`
+export const StyledLinkContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0 50px;
+`;
+
+export const StyledMenuLink = styled(NavLink)`
   text-decoration: none;
   color: #fafafa;
   font-size: 24px;
-  padding: 5px 10px;
+  padding: 10px 20px;
   border-radius: 8px;
   font-weight: 400;
   transition: 0.7s;
+
+  &.active {
+    background-color: #fafafa;
+    color: #001427;
+  }
+
   :hover {
     background-color: #fafafa;
     color: #001427;

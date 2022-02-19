@@ -1,6 +1,10 @@
 import React from "react";
-import { StyledWrapper } from "./MainPage.styled";
+import { StyledPageTitle, StyledWrapper } from "./MainPage.styled";
 
 export const MainPage = () => {
-  return <StyledWrapper>MainPage</StyledWrapper>;
+  return (
+    <StyledWrapper>
+      <StyledPageTitle>Play Game</StyledPageTitle>
+    </StyledWrapper>
+  );
 };
