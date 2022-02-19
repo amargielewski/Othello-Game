@@ -1,9 +1,16 @@
-import { StyledTitle, StyledWrapper } from "./Navbar.styled";
-
+import {
+  StyledMenuContainer,
+  StyledMenuLink,
+  StyledTitle,
+  StyledWrapper,
+} from "./Navbar.styled";
 export const Navbar = () => {
   return (
     <StyledWrapper>
-      <StyledTitle>Othello Game</StyledTitle>
+      <StyledMenuContainer>
+        <StyledTitle>Othello Game</StyledTitle>
+        <StyledMenuLink to="/rules">Rules</StyledMenuLink>
+      </StyledMenuContainer>
     </StyledWrapper>
   );
 };
