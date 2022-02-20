@@ -1,12 +1,19 @@
+//Icons
+import { PlayIcon } from "../../Icons/PlayIcon";
+import { RulesIcon } from "../../Icons/RulesIcon";
+
+import { paths } from "../../constants/paths";
+
+//styles
+
 import {
   StyledLinkContainer,
   StyledMenuContainer,
   StyledMenuLink,
+  StyledMenuLinkText,
   StyledTitle,
   StyledWrapper,
 } from "./Navbar.styled";
-
-import { paths } from "../../constants/paths";
 
 export const Navbar = () => {
   return (
@@ -14,8 +21,14 @@ export const Navbar = () => {
       <StyledMenuContainer>
         <StyledTitle to={paths.main}>Othello Game</StyledTitle>
         <StyledLinkContainer>
-          <StyledMenuLink to={paths.main}>Game</StyledMenuLink>
-          <StyledMenuLink to={paths.rules}>Rules</StyledMenuLink>
+          <StyledMenuLink to={paths.main}>
+            <StyledMenuLinkText>Game</StyledMenuLinkText>
+            <PlayIcon />
+          </StyledMenuLink>
+          <StyledMenuLink to={paths.rules}>
+            <StyledMenuLinkText>Rules</StyledMenuLinkText>
+            <RulesIcon />
+          </StyledMenuLink>
         </StyledLinkContainer>
       </StyledMenuContainer>
     </StyledWrapper>

@@ -43,6 +43,9 @@ export const StyledLinkContainer = styled.div`
 
 export const StyledMenuLink = styled(NavLink)`
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0 10px;
   color: #fafafa;
   font-size: 24px;
   padding: 10px 20px;
@@ -59,4 +62,8 @@ export const StyledMenuLink = styled(NavLink)`
     background-color: #fafafa;
     color: #001427;
   }
+`;
+
+export const StyledMenuLinkText = styled.p`
+  font-size: 24px;
 `;

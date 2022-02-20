@@ -1,3 +1,4 @@
+//styles
 import { StyledTitle, StyledWrapper } from "./RulesPage.styled";
 
 export const RulesPage = () => {

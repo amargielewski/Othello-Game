@@ -1,9 +1,13 @@
-import { MainLayout } from "./layout/MainLayout/MainLayout";
-import { ThemeProvider } from "./providers/theme";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import { paths } from "./constants/paths";
+import { ThemeProvider } from "./providers/theme";
+
+import { MainLayout } from "./layout/MainLayout/MainLayout";
+
+//Pages
 import { MainPage } from "./pages/MainPage/MainPage";
 import { RulesPage } from "./pages/RulesPage/RulesPage";
-import { paths } from "./constants/paths";
 
 function App() {
   return (
