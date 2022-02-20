@@ -5,13 +5,13 @@ import { StyledGameBoard } from "./GameBoard.styled";
 export type CellStatus = "empty" | "white" | "black";
 
 const initialBoard = [
-  [0, 0, 0, 0, 0, 0, 0, 2],
-  [0, 0, 0, 0, 0, 0, 1, 0],
-  [0, 0, 0, 0, 0, 1, 0, 0],
-  [0, 0, 0, 1, 1, 0, 0, 0],
-  [0, 0, 0, 1, 1, 0, 0, 0],
-  [0, 0, 1, 0, 0, 0, 0, 0],
-  [0, 1, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 1, 2, 0, 0, 0],
+  [0, 0, 0, 2, 1, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0]
 ];
 
@@ -25,10 +25,15 @@ const isValidMove = (
   const currentRow = rowIndex;
   const currentColumn = columnIndex;
 
+  if (board[rowIndex][columnIndex] !== 0) return [];
+
   //right
   const rightArr = [];
   for (let column = currentColumn + 1; column <= 7; column++) {
     const fieldValue = board[currentRow][column];
+
+    if (fieldValue === 0 || board[currentRow][currentColumn + 1] === player)
+      break;
 
     if (fieldValue === (player === 1 ? 2 : 1)) {
       rightArr.push({ row: currentRow, column: column });
@@ -40,8 +45,11 @@ const isValidMove = (
   }
   //left
   const leftArr = [];
-  for (let column = currentColumn - 1; column > 0; column--) {
+  for (let column = currentColumn - 1; column >= 0; column--) {
     const fieldValue = board[currentRow][column];
+
+    if (fieldValue === 0 || board[currentRow][currentColumn - 1] === player)
+      break;
 
     if (fieldValue === (player === 1 ? 2 : 1)) {
       leftArr.push({ row: currentRow, column: column });
@@ -53,8 +61,11 @@ const isValidMove = (
   }
   // top
   const topArr = [];
-  for (let row = currentRow - 1; row > 0; row--) {
+  for (let row = currentRow - 1; row >= 0; row--) {
     const fieldValue = board[row][currentColumn];
+
+    if (fieldValue === 0 || board[currentRow - 1][currentColumn] === player)
+      break;
 
     if (fieldValue === (player === 1 ? 2 : 1)) {
       topArr.push({ row: row, column: currentColumn });
@@ -69,6 +80,9 @@ const isValidMove = (
   for (let row = currentRow + 1; row <= 7; row++) {
     const fieldValue = board[row][currentColumn];
 
+    if (fieldValue === 0 || board[currentRow + 1][currentColumn] === player)
+      break;
+
     if (fieldValue === (player === 1 ? 2 : 1)) {
       bottomArr.push({ row: row, column: currentColumn });
     }
@@ -79,16 +93,13 @@ const isValidMove = (
   }
   // diagonal top-right
   const diagonalTopRight = [];
-  const row = currentRow;
-  const col = 8 - currentColumn - 1;
-  const loop = Math.min(row, col);
-  console.log("row", row);
-  console.log("col", col);
-  console.log(loop);
-  for (let i = 1; i <= loop; i++) {
+
+  for (let i = 1; i <= Math.min(currentRow, 8 - currentColumn - 1); i++) {
     const fieldValue = board[currentRow - i][currentColumn + i];
-    console.log("currentRow", currentRow - i);
-    console.log("currentColumn", currentColumn + i);
+
+    if (fieldValue === 0 || board[currentRow - 1][currentColumn + 1] === player)
+      break;
+
     if (fieldValue === (player === 1 ? 2 : 1)) {
       diagonalTopRight.push({ row: currentRow - i, column: currentColumn + i });
     }
@@ -97,7 +108,75 @@ const isValidMove = (
       break;
     }
   }
+  //diagonal top-left
+
+  const diagonalTopLeft = [];
+
+  for (let i = 1; i <= Math.min(currentRow, currentColumn); i++) {
+    const fieldValue = board[currentRow - i][currentColumn - i];
+
+    if (fieldValue === 0 || board[currentRow - 1][currentColumn - 1] === player)
+      break;
+
+    if (fieldValue === (player === 1 ? 2 : 1)) {
+      diagonalTopLeft.push({ row: currentRow - i, column: currentColumn - i });
+    }
+    if (diagonalTopLeft.length > 0 && fieldValue === player) {
+      allPossibleMoves.push(...diagonalTopLeft);
+      break;
+    }
+  }
+
+  //diagonal bottom-right
+
+  const diagonalBottomRight = [];
+
+  for (
+    let i = 1;
+    i <= Math.min(8 - currentRow - 1, 8 - currentColumn - 1);
+    i++
+  ) {
+    const fieldValue = board[currentRow + i][currentColumn + i];
+
+    if (fieldValue === 0 || board[currentRow + 1][currentColumn + 1] === player)
+      break;
+
+    if (fieldValue === (player === 1 ? 2 : 1)) {
+      diagonalBottomRight.push({
+        row: currentRow + i,
+        column: currentColumn + i
+      });
+    }
+    if (diagonalBottomRight.length > 0 && fieldValue === player) {
+      allPossibleMoves.push(...diagonalBottomRight);
+      break;
+    }
+  }
+
+  //diagonal bottom-left
+
+  const diagonalBottomLeft = [];
+
+  for (let i = 1; i <= Math.min(8 - currentRow - 1, currentColumn); i++) {
+    const fieldValue = board[currentRow + i][currentColumn - i];
+
+    if (fieldValue === 0 || board[currentRow + 1][currentColumn - 1] === player)
+      break;
+
+    if (fieldValue === (player === 1 ? 2 : 1)) {
+      diagonalBottomLeft.push({
+        row: currentRow + i,
+        column: currentColumn - i
+      });
+    }
+    if (diagonalBottomLeft.length > 0 && fieldValue === player) {
+      allPossibleMoves.push(...diagonalBottomLeft);
+      break;
+    }
+  }
+
   console.log(allPossibleMoves);
+  return allPossibleMoves;
 };
 
 export const GameBoard = () => {
@@ -105,9 +184,15 @@ export const GameBoard = () => {
   const [board, setBoard] = useState(initialBoard);
 
   const handleClick = (rowIndex: number, columnIndex: number) => {
-    isValidMove(rowIndex, columnIndex, board, move);
-    changeCellValue(rowIndex, columnIndex);
-    setMove((currentMove) => (currentMove === 1 ? 2 : 1));
+    const possibleMoves = isValidMove(rowIndex, columnIndex, board, move);
+
+    if (possibleMoves.length > 0) {
+      possibleMoves.map((move) => {
+        changeCellValue(move.row, move.column);
+      });
+      changeCellValue(rowIndex, columnIndex);
+      setMove((currentMove) => (currentMove === 1 ? 2 : 1));
+    }
   };
 
   const changeCellValue = (rowIndex: number, columnIndex: number) => {
@@ -121,7 +206,7 @@ export const GameBoard = () => {
 
   return (
     <>
-      kogo ruch? {move} {move === 2 ? "Black" : "White"}
+      <h1 style={{ fontSize: "32px" }}>{move === 2 ? "Czarne" : "Białe"}</h1>
       <StyledGameBoard>
         {board.map((row, rowIndex) =>
           row.map((column, columnIndex) => (
@@ -172,8 +257,8 @@ const getFieldColorFromStatus = (status: CellStatus) => {
 };
 
 const getFieldShadowColorFromStatus = (status: CellStatus) => {
-  if (status === "white") return "#dddddd";
-  if (status === "black") return "#333333";
+  if (status === "white") return "#f2f2f2";
+  if (status === "black") return "#1c1c1c";
   return "#21a179";
 };
 
@@ -186,7 +271,8 @@ export const Cell = ({ children, status, onClick }: CellProps) => (
 export const StyledSingleCell = styled.div`
   width: 100%;
   padding: 8px;
-  border: 1px solid red;
+  cursor: pointer;
+  border: 1px solid #20b2aa50;
 `;
 
 export const Disc = ({ status }: CellProps) => (
@@ -201,7 +287,7 @@ export const StyledDisc = styled.div<{
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  padding: 4px;
+  padding: 8px;
   background: ${({ status }) => getFieldColorFromStatus(status)};
 `;
 
