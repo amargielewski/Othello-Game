@@ -6,7 +6,7 @@ export const MainPage = () => {
   return (
     <StyledWrapper>
       <StyledPageTitle>Play Game</StyledPageTitle>
-      <GameBoard></GameBoard>
+      <GameBoard />
     </StyledWrapper>
   );
 };
