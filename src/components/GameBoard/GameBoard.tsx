@@ -287,7 +287,7 @@ export const StyledDisc = styled.div<{
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  padding: 8px;
+  padding: 7px;
   background: ${({ status }) => getFieldColorFromStatus(status)};
 `;
 
