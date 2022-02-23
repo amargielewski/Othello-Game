@@ -129,7 +129,7 @@ export const isValidMove = (
     if (fieldValue === (player === 1 ? 2 : 1)) {
       diagonalBottomRight.push({
         row: currentRow + i,
-        column: currentColumn + i
+        column: currentColumn + i,
       });
     }
     if (diagonalBottomRight.length > 0 && fieldValue === player) {
@@ -151,7 +151,7 @@ export const isValidMove = (
     if (fieldValue === (player === 1 ? 2 : 1)) {
       diagonalBottomLeft.push({
         row: currentRow + i,
-        column: currentColumn - i
+        column: currentColumn - i,
       });
     }
     if (diagonalBottomLeft.length > 0 && fieldValue === player) {

@@ -1,20 +1,23 @@
 import { ReactChildren, useEffect, useState } from "react";
-import styled from "styled-components";
+
+//game logic
+import { CellStatus, getStatusName, isValidMove } from "../../game/game";
+
+//style
 import {
+  DiscInner,
   StyledCountBlackBox,
   StyledCountContainer,
   StyledCountWhiteBox,
   StyledCurrentMoveName,
+  StyledDisc,
   StyledGameBoard,
-  StyledSingleCell
+  StyledSingleCell,
+  StyledCountWhiteBoxDisc,
+  StyledCountBlackBoxDisc,
+  StyledCountWhiteBoxValue,
+  StyledCountBlackBoxValue,
 } from "./GameBoard.styled";
-import {
-  CellStatus,
-  getFieldColorFromStatus,
-  getFieldShadowColorFromStatus,
-  getStatusName,
-  isValidMove
-} from "../../game/game";
 
 const initialBoard = [
   [0, 0, 0, 0, 0, 0, 0, 0],
@@ -24,8 +27,20 @@ const initialBoard = [
   [0, 0, 0, 2, 1, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0]
+  [0, 0, 0, 0, 0, 0, 0, 0],
 ];
+
+export const Cell = ({ children, status, onClick }: CellProps) => (
+  <StyledSingleCell onClick={onClick}>
+    <Disc status={status}>{children}</Disc>
+  </StyledSingleCell>
+);
+
+export const Disc = ({ status }: CellProps) => (
+  <StyledDisc status={status}>
+    <DiscInner status={status} />
+  </StyledDisc>
+);
 
 export const GameBoard = () => {
   const [move, setMove] = useState<1 | 2>(2);
@@ -62,12 +77,15 @@ export const GameBoard = () => {
 
   return (
     <>
-      <StyledCurrentMoveName>
-        {move === 2 ? "Czarne" : "Białe"}
-      </StyledCurrentMoveName>
       <StyledCountContainer>
-        <StyledCountWhiteBox>White: {whiteMoves}</StyledCountWhiteBox>
-        <StyledCountBlackBox>Black: {blackMoves}</StyledCountBlackBox>
+        <StyledCountWhiteBox active={move === 1}>
+          <StyledCountWhiteBoxDisc></StyledCountWhiteBoxDisc>
+          <StyledCountWhiteBoxValue>{whiteMoves}</StyledCountWhiteBoxValue>
+        </StyledCountWhiteBox>
+        <StyledCountBlackBox active={move === 2}>
+          <StyledCountBlackBoxDisc></StyledCountBlackBoxDisc>
+          <StyledCountBlackBoxValue>{blackMoves}</StyledCountBlackBoxValue>
+        </StyledCountBlackBox>
       </StyledCountContainer>
       <StyledGameBoard>
         {board.map((row, rowIndex) =>
@@ -87,7 +105,7 @@ export const GameBoard = () => {
             {row.map((value, colI) => (
               <span
                 style={{
-                  color: value === 1 ? "red" : value === 2 ? "green" : "yellow"
+                  color: value === 1 ? "red" : value === 2 ? "green" : "yellow",
                 }}
                 key={rowI + colI}
               >
@@ -102,37 +120,7 @@ export const GameBoard = () => {
 };
 
 type CellProps = {
-  children: ReactChildren;
+  children?: ReactChildren;
   status: CellStatus;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
 };
-
-export const Cell = ({ children, status, onClick }: CellProps) => (
-  <StyledSingleCell onClick={onClick}>
-    <Disc status={status}>{children}</Disc>
-  </StyledSingleCell>
-);
-
-export const Disc = ({ status }: CellProps) => (
-  <StyledDisc status={status}>
-    <DiscInner status={status} />
-  </StyledDisc>
-);
-
-export const StyledDisc = styled.div<{
-  status: CellStatus;
-}>`
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  padding: 7px;
-  background: ${({ status }) => getFieldColorFromStatus(status)};
-`;
-
-export const DiscInner = styled.div<{
-  status: CellStatus;
-}>`
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: ${({ status }) => getFieldShadowColorFromStatus(status)};
-`;
