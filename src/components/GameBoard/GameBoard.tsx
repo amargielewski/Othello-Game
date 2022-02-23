@@ -1,6 +1,12 @@
-import { ReactChildren, useState } from "react";
+import { ReactChildren, useEffect, useState } from "react";
 import styled from "styled-components";
-import { StyledGameBoard } from "./GameBoard.styled";
+import {
+  StyledCountBlackBox,
+  StyledCountContainer,
+  StyledCountWhiteBox,
+  StyledCurrentMoveName,
+  StyledGameBoard
+} from "./GameBoard.styled";
 
 export type CellStatus = "empty" | "white" | "black";
 
@@ -182,6 +188,8 @@ const isValidMove = (
 export const GameBoard = () => {
   const [move, setMove] = useState<1 | 2>(2);
   const [board, setBoard] = useState(initialBoard);
+  const [whiteMoves, setWhiteMoves] = useState(2);
+  const [blackMoves, setBlackMoves] = useState(2);
 
   const handleClick = (rowIndex: number, columnIndex: number) => {
     const possibleMoves = isValidMove(rowIndex, columnIndex, board, move);
@@ -204,9 +212,21 @@ export const GameBoard = () => {
     });
   };
 
+  useEffect(() => {
+    setWhiteMoves((prev) => board.flat().filter((cell) => cell === 1).length);
+
+    setBlackMoves((prev) => board.flat().filter((cell) => cell === 2).length);
+  }, [board]);
+
   return (
     <>
-      <h1 style={{ fontSize: "32px" }}>{move === 2 ? "Czarne" : "Białe"}</h1>
+      <StyledCurrentMoveName>
+        {move === 2 ? "Czarne" : "Białe"}
+      </StyledCurrentMoveName>
+      <StyledCountContainer>
+        <StyledCountWhiteBox>White: {whiteMoves}</StyledCountWhiteBox>
+        <StyledCountBlackBox>Black: {blackMoves}</StyledCountBlackBox>
+      </StyledCountContainer>
       <StyledGameBoard>
         {board.map((row, rowIndex) =>
           row.map((column, columnIndex) => (
