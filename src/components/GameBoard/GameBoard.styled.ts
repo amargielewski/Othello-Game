@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { CellStatus } from "./GameBoard";
 
 export const StyledGameBoard = styled.div`
   background-color: #21a179;
@@ -20,4 +21,11 @@ export const StyledCountBlackBox = styled.div``;
 
 export const StyledCurrentMoveName = styled.h2`
   font-size: 35px;
+`;
+
+export const StyledSingleCell = styled.div`
+  width: 100%;
+  padding: 8px;
+  cursor: pointer;
+  border: 1px solid #20b2aa50;
 `;
