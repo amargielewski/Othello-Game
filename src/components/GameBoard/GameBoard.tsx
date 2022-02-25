@@ -9,14 +9,11 @@ import {
   StyledCountBlackBox,
   StyledCountContainer,
   StyledCountWhiteBox,
-  StyledCurrentMoveName,
   StyledDisc,
   StyledGameBoard,
   StyledSingleCell,
-  StyledCountWhiteBoxDisc,
-  StyledCountBlackBoxDisc,
-  StyledCountWhiteBoxValue,
-  StyledCountBlackBoxValue,
+  StyledCountDisc,
+  StyledCountBoxValue,
 } from "./GameBoard.styled";
 
 const initialBoard = [
@@ -79,12 +76,12 @@ export const GameBoard = () => {
     <>
       <StyledCountContainer>
         <StyledCountWhiteBox active={move === 1}>
-          <StyledCountWhiteBoxDisc></StyledCountWhiteBoxDisc>
-          <StyledCountWhiteBoxValue>{whiteMoves}</StyledCountWhiteBoxValue>
+          <StyledCountDisc discColor={"#fff"}></StyledCountDisc>
+          <StyledCountBoxValue>{whiteMoves}</StyledCountBoxValue>
         </StyledCountWhiteBox>
         <StyledCountBlackBox active={move === 2}>
-          <StyledCountBlackBoxDisc></StyledCountBlackBoxDisc>
-          <StyledCountBlackBoxValue>{blackMoves}</StyledCountBlackBoxValue>
+          <StyledCountDisc discColor={"#000"}></StyledCountDisc>
+          <StyledCountBoxValue>{blackMoves}</StyledCountBoxValue>
         </StyledCountBlackBox>
       </StyledCountContainer>
       <StyledGameBoard>

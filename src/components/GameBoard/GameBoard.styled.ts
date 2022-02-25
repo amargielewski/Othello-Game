@@ -9,8 +9,8 @@ export const StyledGameBoard = styled.div`
   background-color: #21a179;
   border: 5px solid #fafafa;
   display: grid;
-  grid-template-rows: repeat(8, 75px);
-  grid-template-columns: repeat(8, 75px);
+  grid-template-rows: repeat(8, 80px);
+  grid-template-columns: repeat(8, 80px);
 `;
 
 export const StyledCountContainer = styled.div`
@@ -29,17 +29,10 @@ const StyledCountBox = css`
   padding: 10px 5px;
 `;
 
-const StyledCountDics = css`
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-`;
-
-const StyledCountValue = css`
+export const StyledCountBoxValue = styled.p`
   font-size: 28px;
 `;
 
-//black-box
 export const StyledCountBlackBox = styled.div<{
   active: boolean;
 }>`
@@ -47,31 +40,20 @@ export const StyledCountBlackBox = styled.div<{
   opacity: ${({ active }) => (active ? 1 : 0.4)};
 `;
 
-export const StyledCountBlackBoxDisc = styled.p`
-  ${StyledCountDics};
-  background-color: black;
-`;
-export const StyledCountBlackBoxValue = styled.p`
-  ${StyledCountValue}
+export const StyledCountDisc = styled.div<{
+  discColor: "#fff" | "#000";
+}>`
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: ${({ discColor }) => discColor};
 `;
 
-//white-box
 export const StyledCountWhiteBox = styled.div<{
   active: boolean;
 }>`
   ${StyledCountBox};
   opacity: ${({ active }) => (active ? 1 : 0.4)};
-`;
-export const StyledCountWhiteBoxDisc = styled.p`
-  ${StyledCountDics}
-  background-color: white;
-`;
-export const StyledCountWhiteBoxValue = styled.p`
-  ${StyledCountValue}
-`;
-
-export const StyledCurrentMoveName = styled.h2`
-  font-size: 35px;
 `;
 
 export const StyledSingleCell = styled.div`

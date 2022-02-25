@@ -4,7 +4,7 @@ import { GlobalStyle } from "../styles/GlobalStyle";
 const theme = {
   colors: {
     oxford_blue: "#001427",
-    hunter_green: "#34623F",
+    hunter_green: "#21a179",
     white: "#fafafa",
   },
 };
