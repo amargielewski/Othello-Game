@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import {
   CellStatus,
   getFieldColorFromStatus,
-  getFieldShadowColorFromStatus,
+  getFieldShadowColorFromStatus
 } from "../../game/game";
 
 export const StyledGameBoard = styled.div`
@@ -26,11 +26,13 @@ const StyledCountBox = css`
   gap: 0 10px;
   background-color: #21a179;
   border: 2px solid white;
-  padding: 10px 5px;
+  width: 70px;
+  height: 70px;
+  justify-content: center;
 `;
 
 export const StyledCountBoxValue = styled.p`
-  font-size: 28px;
+  font-size: 20px;
 `;
 
 export const StyledCountBlackBox = styled.div<{
@@ -43,8 +45,8 @@ export const StyledCountBlackBox = styled.div<{
 export const StyledCountDisc = styled.div<{
   discColor: "#fff" | "#000";
 }>`
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   background-color: ${({ discColor }) => discColor};
 `;
