@@ -11,7 +11,7 @@ ${ResetCss};
   }
 
   body {
-    background-color: #001427;
+    background-color:#21295C;
     color:#fafafa;
   }
 `;

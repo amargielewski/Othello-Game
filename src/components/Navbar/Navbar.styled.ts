@@ -55,12 +55,12 @@ export const StyledMenuLink = styled(NavLink)`
 
   &.active {
     background-color: #fafafa;
-    color: #001427;
+    color: #21295c;
   }
 
   :hover {
     background-color: #fafafa;
-    color: #001427;
+    color: #21295c;
   }
 `;
 

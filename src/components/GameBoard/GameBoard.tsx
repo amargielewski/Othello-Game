@@ -19,7 +19,14 @@ import {
   StyledGameBoardModalCaption,
   StyledGameBoardModalText,
   StyledWinModalText,
-  StyledWinModalButton
+  StyledWinModalButton,
+  StyledGameResetButton,
+  StyledGameWinnerText,
+  StyledWrapper,
+  StyledGameInfoWrapper,
+  StyledGameInfoTitle,
+  StyledGameInfoTitleContainer,
+  StyledGameInfoContentContainer,
 } from "./GameBoard.styled";
 
 const initialBoard1 = [
@@ -30,7 +37,7 @@ const initialBoard1 = [
   [1, 2, 1, 1, 2, 2, 1, 1],
   [1, 2, 1, 1, 1, 1, 2, 2],
   [1, 1, 2, 2, 2, 2, 1, 2],
-  [1, 1, 1, 1, 1, 1, 1, 0]
+  [1, 1, 1, 1, 1, 1, 1, 0],
 ];
 
 const initialBoard = [
@@ -41,7 +48,7 @@ const initialBoard = [
   [0, 0, 0, 2, 1, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0]
+  [0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
 export const Cell = ({ children, status, onClick }: CellProps) => (
@@ -64,7 +71,9 @@ export const GameBoard = () => {
   const [isSkipMoveModalOpen, setSkipMoveModalOpen] = useState(false);
   const [isWinModalOpen, setIsWinModalOpen] = useState(false);
   const [isResetBtnDisplay, setIsResetBtnDisplay] = useState(false);
-  console.table(initialBoard);
+  const [winner, setWinner] = useState<"blacks" | "whites" | "draw" | null>(
+    null
+  );
   const handleSkipMoveModalClose = () => {
     setSkipMoveModalOpen(false);
   };
@@ -79,7 +88,7 @@ export const GameBoard = () => {
     setMove(2);
     setBlackMoves(2);
     setWhiteMoves(2);
-
+    setWinner(null);
     setSkipMoveModalOpen(false);
     setIsWinModalOpen(false);
     setIsResetBtnDisplay(false);
@@ -129,6 +138,16 @@ export const GameBoard = () => {
     });
 
     if (whitePossibleMoves.length === 0 && blackPossibleMoves.length === 0) {
+      const whiteMoves = board.flat().filter((cell) => cell === 1).length;
+
+      const blackMoves = board.flat().filter((cell) => cell === 2).length;
+
+      const findWinner = () => {
+        if (blackMoves === whiteMoves) return "draw";
+        if (blackMoves > whiteMoves) return "blacks";
+        return "whites";
+      };
+      setWinner(findWinner());
       setIsWinModalOpen(true);
       return;
     }
@@ -147,20 +166,35 @@ export const GameBoard = () => {
   };
 
   return (
-    <>
-      {isResetBtnDisplay && (
-        <button onClick={handleGameReset}>Play Again</button>
-      )}
-      <StyledCountContainer>
-        <StyledCountWhiteBox active={move === 1}>
-          <StyledCountDisc discColor={"#fff"}></StyledCountDisc>
-          <StyledCountBoxValue>{whiteMoves}</StyledCountBoxValue>
-        </StyledCountWhiteBox>
-        <StyledCountBlackBox active={move === 2}>
-          <StyledCountDisc discColor={"#000"}></StyledCountDisc>
-          <StyledCountBoxValue>{blackMoves}</StyledCountBoxValue>
-        </StyledCountBlackBox>
-      </StyledCountContainer>
+    <StyledWrapper>
+      <StyledGameInfoWrapper>
+        <StyledGameInfoTitleContainer>
+          <StyledGameInfoTitle>game info</StyledGameInfoTitle>
+        </StyledGameInfoTitleContainer>
+        <StyledGameInfoContentContainer>
+          {isResetBtnDisplay && (
+            <StyledGameWinnerText>
+              {" "}
+              {winner === "draw" ? winner : `${winner} win`}
+            </StyledGameWinnerText>
+          )}
+          <StyledCountContainer>
+            <StyledCountWhiteBox active={move === 1}>
+              <StyledCountDisc discColor={"#fff"}></StyledCountDisc>
+              <StyledCountBoxValue>{whiteMoves}</StyledCountBoxValue>
+            </StyledCountWhiteBox>
+            <StyledCountBlackBox active={move === 2}>
+              <StyledCountDisc discColor={"#000"}></StyledCountDisc>
+              <StyledCountBoxValue>{blackMoves}</StyledCountBoxValue>
+            </StyledCountBlackBox>
+          </StyledCountContainer>
+          {isResetBtnDisplay && (
+            <StyledGameResetButton onClick={handleGameReset}>
+              Play Again
+            </StyledGameResetButton>
+          )}
+        </StyledGameInfoContentContainer>
+      </StyledGameInfoWrapper>
       <StyledGameBoardWrapper>
         <StyledGameBoard>
           {board.map((row, rowIndex) =>
@@ -186,7 +220,9 @@ export const GameBoard = () => {
 
         {isWinModalOpen && (
           <StyledGameBoardModal onClick={handleSkipMoveModalClose}>
-            <StyledWinModalText>Player Win</StyledWinModalText>
+            <StyledWinModalText>
+              {winner === "draw" ? winner : `${winner} win`}
+            </StyledWinModalText>
             <StyledWinModalButton onClick={handleGameReset}>
               Play Again
             </StyledWinModalButton>
@@ -196,7 +232,7 @@ export const GameBoard = () => {
           </StyledGameBoardModal>
         )}
       </StyledGameBoardWrapper>
-    </>
+    </StyledWrapper>
   );
 };
 
