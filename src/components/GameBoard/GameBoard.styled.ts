@@ -5,6 +5,10 @@ import {
   getFieldShadowColorFromStatus
 } from "../../game/game";
 
+export const StyledGameBoardWrapper = styled.div`
+  position: relative;
+`;
+
 export const StyledGameBoard = styled.div`
   background-color: #21a179;
   border: 5px solid #fafafa;
@@ -27,6 +31,7 @@ const StyledCountBox = css`
   background-color: #21a179;
   border: 2px solid white;
   width: 70px;
+  padding: 5px;
   height: 70px;
   justify-content: center;
 `;
@@ -82,4 +87,45 @@ export const DiscInner = styled.div<{
   height: 100%;
   border-radius: 50%;
   background: ${({ status }) => getFieldShadowColorFromStatus(status)};
+`;
+
+export const StyledGameBoardModal = styled.div`
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #0d3d2ecc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px 0;
+`;
+
+export const StyledGameBoardModalText = styled.p`
+  font-size: 30px;
+`;
+
+export const StyledGameBoardModalCaption = styled.p`
+  font-size: 20px;
+`;
+
+export const StyledWinModalText = styled.p`
+  font-weight: 600;
+  font-size: 50px;
+`;
+
+export const StyledWinModalButton = styled.button`
+  color: #fafafa;
+  padding: 5px 10px;
+  border: 1px solid #fff;
+  font-size: 30px;
+  cursor: pointer;
+  background: transparent;
+  transition: 0.5s;
+
+  :hover {
+    background: white;
+    color: #0d3d2ecc;
+  }
 `;

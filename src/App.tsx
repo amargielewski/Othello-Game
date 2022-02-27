@@ -8,7 +8,7 @@ import { MainLayout } from "./layout/MainLayout/MainLayout";
 //Pages
 import { MainPage } from "./pages/MainPage/MainPage";
 import { RulesPage } from "./pages/RulesPage/RulesPage";
-
+import { FreeUkrainePage } from "./pages/FreeUkrainePage/FreeUkrainePage";
 function App() {
   return (
     <BrowserRouter>
@@ -17,6 +17,7 @@ function App() {
           <Routes>
             <Route path={paths.main} element={<MainPage />} />
             <Route path={paths.rules} element={<RulesPage />} />
+            <Route path={paths.free_ukraine} element={<FreeUkrainePage />} />
           </Routes>
         </MainLayout>
       </ThemeProvider>
