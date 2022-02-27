@@ -1,7 +1,13 @@
 import { ReactChildren, useEffect, useState } from "react";
+import {
+  CSSTransition,
+  TransitionGroup,
+  Transition,
+} from "react-transition-group";
 
 //game logic
 import { CellStatus, getStatusName, isValidMove } from "../../game/game";
+import { RightArrowIcon } from "../../Icons/RightArrowIcon";
 
 //style
 import {
@@ -27,6 +33,7 @@ import {
   StyledGameInfoTitle,
   StyledGameInfoTitleContainer,
   StyledGameInfoContentContainer,
+  StyledCloseInfoButton,
 } from "./GameBoard.styled";
 
 const initialBoard1 = [
@@ -74,6 +81,7 @@ export const GameBoard = () => {
   const [winner, setWinner] = useState<"blacks" | "whites" | "draw" | null>(
     null
   );
+  const [isGameInfoDisplay, setIsGameInfoDisplay] = useState(false);
   const handleSkipMoveModalClose = () => {
     setSkipMoveModalOpen(false);
   };
@@ -167,34 +175,43 @@ export const GameBoard = () => {
 
   return (
     <StyledWrapper>
-      <StyledGameInfoWrapper>
-        <StyledGameInfoTitleContainer>
-          <StyledGameInfoTitle>game info</StyledGameInfoTitle>
-        </StyledGameInfoTitleContainer>
-        <StyledGameInfoContentContainer>
-          {isResetBtnDisplay && (
-            <StyledGameWinnerText>
-              {" "}
-              {winner === "draw" ? winner : `${winner} win`}
-            </StyledGameWinnerText>
-          )}
-          <StyledCountContainer>
-            <StyledCountWhiteBox active={move === 1}>
-              <StyledCountDisc discColor={"#fff"}></StyledCountDisc>
-              <StyledCountBoxValue>{whiteMoves}</StyledCountBoxValue>
-            </StyledCountWhiteBox>
-            <StyledCountBlackBox active={move === 2}>
-              <StyledCountDisc discColor={"#000"}></StyledCountDisc>
-              <StyledCountBoxValue>{blackMoves}</StyledCountBoxValue>
-            </StyledCountBlackBox>
-          </StyledCountContainer>
-          {isResetBtnDisplay && (
-            <StyledGameResetButton onClick={handleGameReset}>
-              Play Again
-            </StyledGameResetButton>
-          )}
-        </StyledGameInfoContentContainer>
-      </StyledGameInfoWrapper>
+      <Transition in={isGameInfoDisplay} timeout={500}>
+        {(state) => (
+          <StyledGameInfoWrapper className={state}>
+            <StyledCloseInfoButton
+              className={state}
+              onClick={() => setIsGameInfoDisplay((prev) => !prev)}
+            >
+              <RightArrowIcon />
+            </StyledCloseInfoButton>
+            <StyledGameInfoTitleContainer>
+              <StyledGameInfoTitle>game info</StyledGameInfoTitle>
+            </StyledGameInfoTitleContainer>
+            <StyledGameInfoContentContainer>
+              {isResetBtnDisplay && (
+                <StyledGameWinnerText>
+                  {" "}
+                  {winner === "draw" ? winner : `${winner} win`}
+                </StyledGameWinnerText>
+              )}
+              <StyledCountContainer>
+                <StyledCountWhiteBox active={move === 1}>
+                  <StyledCountDisc discColor={"#fff"}></StyledCountDisc>
+                  <StyledCountBoxValue>{whiteMoves}</StyledCountBoxValue>
+                </StyledCountWhiteBox>
+                <StyledCountBlackBox active={move === 2}>
+                  <StyledCountDisc discColor={"#000"}></StyledCountDisc>
+                  <StyledCountBoxValue>{blackMoves}</StyledCountBoxValue>
+                </StyledCountBlackBox>
+              </StyledCountContainer>
+
+              <StyledGameResetButton onClick={handleGameReset}>
+                Play Again
+              </StyledGameResetButton>
+            </StyledGameInfoContentContainer>
+          </StyledGameInfoWrapper>
+        )}
+      </Transition>
       <StyledGameBoardWrapper>
         <StyledGameBoard>
           {board.map((row, rowIndex) =>
@@ -223,9 +240,7 @@ export const GameBoard = () => {
             <StyledWinModalText>
               {winner === "draw" ? winner : `${winner} win`}
             </StyledWinModalText>
-            <StyledWinModalButton onClick={handleGameReset}>
-              Play Again
-            </StyledWinModalButton>
+
             <StyledWinModalButton onClick={handleWinModalClose}>
               Show Gameboard
             </StyledWinModalButton>

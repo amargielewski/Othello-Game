@@ -13,13 +13,74 @@ export const StyledGameBoardWrapper = styled.div`
   position: relative;
 `;
 
+export const StyledCloseInfoButton = styled.div`
+  position: absolute;
+  top: -2px;
+  left: -42px;
+  display: flex;
+  justify-content: center;
+  font-size: 24px;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #fafafa;
+
+  :hover {
+    background-color: #fafafa;
+    color: #21295c;
+  }
+
+  &.entering {
+    svg {
+      transform: rotate(0);
+      transition: all 500ms ease-in-out;
+    }
+  }
+  &.entered {
+    svg {
+      transform: rotate(180deg);
+      transition: all 500ms ease-in-out;
+    }
+  }
+  &.exiting {
+    svg {
+      transform: rotate(180deg);
+    }
+  }
+
+  &.exited {
+    svg {
+      transform: rotate(0);
+      transition: all 500ms ease-in-out;
+    }
+  }
+`;
+
 export const StyledGameInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
   gap: 40px 0;
   border: 2px solid #fafafa;
   min-width: 190px;
+
+  &.entering {
+    transform: translateX(0);
+    transition: all 500ms ease-in-out;
+  }
+  &.entered {
+    transform: translateX(100%);
+    transition: all 500ms ease-in-out;
+  }
+  &.exiting {
+    transform: translateX(100%);
+  }
+
+  &.exited {
+    transform: translateX(0);
+    transition: all 500ms ease-in-out;
+  }
 `;
 
 export const StyledGameInfoContentContainer = styled.div`
