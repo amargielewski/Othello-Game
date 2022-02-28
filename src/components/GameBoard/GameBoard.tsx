@@ -175,7 +175,7 @@ export const GameBoard = () => {
 
   return (
     <StyledWrapper>
-      <Transition in={isGameInfoDisplay} timeout={500}>
+      <Transition in={isGameInfoDisplay} timeout={300}>
         {(state) => (
           <StyledGameInfoWrapper className={state}>
             <StyledCloseInfoButton
@@ -190,7 +190,6 @@ export const GameBoard = () => {
             <StyledGameInfoContentContainer>
               {isResetBtnDisplay && (
                 <StyledGameWinnerText>
-                  {" "}
                   {winner === "draw" ? winner : `${winner} win`}
                 </StyledGameWinnerText>
               )}
@@ -220,7 +219,7 @@ export const GameBoard = () => {
                 key={rowIndex + columnIndex}
                 onClick={() => handleClick(rowIndex, columnIndex)}
                 status={getStatusName(board[rowIndex][columnIndex])}
-              ></Cell>
+              />
             ))
           )}
         </StyledGameBoard>

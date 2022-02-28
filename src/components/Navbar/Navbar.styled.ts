@@ -26,6 +26,12 @@ export const StyledMenuContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 650px) {
+    padding: 0 10px;
+    flex-direction: column;
+    gap: 30px 0;
+  }
 `;
 
 export const StyledTitle = styled(Link)`
@@ -35,10 +41,35 @@ export const StyledTitle = styled(Link)`
   color: #fafafa;
 `;
 
-export const StyledLinkContainer = styled.div`
+export const StyledLinkContainer = styled.div<{
+  toggleVisibility: boolean;
+}>`
   display: flex;
   align-items: center;
   gap: 0 50px;
+
+  @media (max-width: 650px) {
+    &.entering {
+      opacity: 0;
+      transform: translateY(-200%);
+      transition: all 300ms ease-in-out;
+    }
+    &.entered {
+      transform: translateY(0);
+      transition: all 300ms ease-in-out;
+    }
+    &.exiting {
+      transform: translateY(0);
+      transition: all 300ms ease-in-out;
+    }
+
+    &.exited {
+      transform: translateY(-200%);
+      opacity: 0;
+      display: none;
+      transition: all 300ms ease-in-out;
+    }
+  }
 `;
 
 export const StyledMenuLink = styled(NavLink)`
@@ -66,4 +97,20 @@ export const StyledMenuLink = styled(NavLink)`
 
 export const StyledMenuLinkText = styled.p`
   font-size: 24px;
+`;
+
+export const StyledTitleContainer = styled.div`
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+`;
+
+export const StyledMenuToggleButton = styled.div`
+  font-size: 40px;
+  display: none;
+
+  @media (max-width: 650px) {
+    display: block;
+  }
 `;
