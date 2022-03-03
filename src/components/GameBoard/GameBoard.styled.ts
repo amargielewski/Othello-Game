@@ -148,6 +148,16 @@ export const StyledGameBoard = styled.div`
     grid-template-rows: repeat(8, 60px);
     grid-template-columns: repeat(8, 60px);
   }
+
+  @media (max-width: 650px) {
+    grid-template-rows: repeat(8, 50px);
+    grid-template-columns: repeat(8, 50px);
+  }
+
+  @media (max-width: 500px) {
+    grid-template-rows: repeat(8, 35px);
+    grid-template-columns: repeat(8, 35px);
+  }
 `;
 
 export const StyledCountContainer = styled.div`
