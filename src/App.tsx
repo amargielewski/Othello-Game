@@ -14,11 +14,12 @@ function App() {
     <BrowserRouter>
       <ThemeProvider>
         <MainLayout>
-          <Routes>
-            <Route path={paths.main} element={<MainPage />} />
+          <MainPage />
+          {/* <Routes>
+            <Route path={paths.main} element={} />
             <Route path={paths.rules} element={<RulesPage />} />
             <Route path={paths.free_ukraine} element={<FreeUkrainePage />} />
-          </Routes>
+          </Routes> */}
         </MainLayout>
       </ThemeProvider>
     </BrowserRouter>
