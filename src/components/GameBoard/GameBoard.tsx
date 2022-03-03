@@ -36,17 +36,6 @@ import {
   StyledCloseInfoButton,
 } from "./GameBoard.styled";
 
-const initialBoard1 = [
-  [1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 2, 2, 2, 1, 1, 1],
-  [1, 1, 1, 2, 1, 1, 2, 1],
-  [1, 2, 1, 1, 2, 1, 1, 1],
-  [1, 2, 1, 1, 2, 2, 1, 1],
-  [1, 2, 1, 1, 1, 1, 2, 2],
-  [1, 1, 2, 2, 2, 2, 1, 2],
-  [1, 1, 1, 1, 1, 1, 1, 0],
-];
-
 const initialBoard = [
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
@@ -72,12 +61,13 @@ export const Disc = ({ status }: CellProps) => (
 
 export const GameBoard = () => {
   const [move, setMove] = useState<1 | 2>(2);
-  const [board, setBoard] = useState([...initialBoard1]);
+  const [board, setBoard] = useState([...initialBoard]);
   const [whiteMoves, setWhiteMoves] = useState(2);
   const [blackMoves, setBlackMoves] = useState(2);
   const [isSkipMoveModalOpen, setSkipMoveModalOpen] = useState(false);
   const [isWinModalOpen, setIsWinModalOpen] = useState(false);
   const [isResetBtnDisplay, setIsResetBtnDisplay] = useState(false);
+
   const [winner, setWinner] = useState<"blacks" | "whites" | "draw" | null>(
     null
   );
@@ -116,7 +106,7 @@ export const GameBoard = () => {
 
   const changeCellValue = (rowIndex: number, columnIndex: number) => {
     setBoard((prevBoard) => {
-      const newBoard = [...prevBoard];
+      const newBoard = JSON.parse(JSON.stringify(prevBoard));
       console.log("move", move);
       newBoard[rowIndex][columnIndex] = move;
       return newBoard;
@@ -173,8 +163,45 @@ export const GameBoard = () => {
     }
   };
 
+  console.log();
+
   return (
     <StyledWrapper>
+      <StyledGameBoardWrapper>
+        <StyledGameBoard>
+          {board.map((row, rowIndex) =>
+            row.map((column, columnIndex) => (
+              <Cell
+                key={rowIndex + columnIndex}
+                onClick={() => handleClick(rowIndex, columnIndex)}
+                status={getStatusName(board[rowIndex][columnIndex])}
+              />
+            ))
+          )}
+        </StyledGameBoard>
+        {isSkipMoveModalOpen && (
+          <StyledGameBoardModal onClick={handleSkipMoveModalClose}>
+            <StyledGameBoardModalText>
+              No possible moves, you lose a turn to your opponent
+            </StyledGameBoardModalText>
+            <StyledGameBoardModalCaption>
+              (Click on gameboard to close this modal)
+            </StyledGameBoardModalCaption>
+          </StyledGameBoardModal>
+        )}
+
+        {isWinModalOpen && (
+          <StyledGameBoardModal onClick={handleSkipMoveModalClose}>
+            <StyledWinModalText>
+              {winner === "draw" ? winner : `${winner} win`}
+            </StyledWinModalText>
+
+            <StyledWinModalButton onClick={handleWinModalClose}>
+              Show Gameboard
+            </StyledWinModalButton>
+          </StyledGameBoardModal>
+        )}
+      </StyledGameBoardWrapper>
       <Transition in={isGameInfoDisplay} timeout={300}>
         {(state) => (
           <StyledGameInfoWrapper className={state}>
@@ -211,41 +238,6 @@ export const GameBoard = () => {
           </StyledGameInfoWrapper>
         )}
       </Transition>
-      <StyledGameBoardWrapper>
-        <StyledGameBoard>
-          {board.map((row, rowIndex) =>
-            row.map((column, columnIndex) => (
-              <Cell
-                key={rowIndex + columnIndex}
-                onClick={() => handleClick(rowIndex, columnIndex)}
-                status={getStatusName(board[rowIndex][columnIndex])}
-              />
-            ))
-          )}
-        </StyledGameBoard>
-        {isSkipMoveModalOpen && (
-          <StyledGameBoardModal onClick={handleSkipMoveModalClose}>
-            <StyledGameBoardModalText>
-              No possible moves, you lose a turn to your opponent
-            </StyledGameBoardModalText>
-            <StyledGameBoardModalCaption>
-              (Click on gameboard to close this modal)
-            </StyledGameBoardModalCaption>
-          </StyledGameBoardModal>
-        )}
-
-        {isWinModalOpen && (
-          <StyledGameBoardModal onClick={handleSkipMoveModalClose}>
-            <StyledWinModalText>
-              {winner === "draw" ? winner : `${winner} win`}
-            </StyledWinModalText>
-
-            <StyledWinModalButton onClick={handleWinModalClose}>
-              Show Gameboard
-            </StyledWinModalButton>
-          </StyledGameBoardModal>
-        )}
-      </StyledGameBoardWrapper>
     </StyledWrapper>
   );
 };

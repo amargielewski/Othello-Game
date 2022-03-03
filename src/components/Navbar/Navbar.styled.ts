@@ -6,16 +6,8 @@ export const StyledWrapper = styled.div`
   display: flex;
   justify-content: center;
   padding: 15px 0;
-  position: relative;
 
-  ::after {
-    position: absolute;
-    content: "";
-    background: #fafafa10;
-    width: 100%;
-    height: 1px;
-    bottom: 0;
-  }
+  border: 1px solid #fafafa10;
 `;
 
 export const StyledMenuContainer = styled.div`
@@ -26,7 +18,6 @@ export const StyledMenuContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   @media (max-width: 650px) {
     padding: 0 10px;
     flex-direction: column;
@@ -49,23 +40,26 @@ export const StyledLinkContainer = styled.div<{
   gap: 0 50px;
 
   @media (max-width: 650px) {
+    z-index: 1;
     &.entering {
       opacity: 0;
       transform: translateY(-200%);
       transition: all 300ms ease-in-out;
     }
     &.entered {
+      opacity: 1;
       transform: translateY(0);
       transition: all 300ms ease-in-out;
     }
     &.exiting {
-      transform: translateY(0);
+      opacity: 0;
+      transform: translateY(-200%);
       transition: all 300ms ease-in-out;
     }
 
     &.exited {
-      transform: translateY(-200%);
       opacity: 0;
+      transform: translateY(0);
       display: none;
       transition: all 300ms ease-in-out;
     }

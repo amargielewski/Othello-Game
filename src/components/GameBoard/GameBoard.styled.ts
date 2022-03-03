@@ -6,14 +6,16 @@ import {
 } from "../../game/game";
 
 export const StyledWrapper = styled.div`
+  position: relative;
   display: flex;
 
-  @media (max-width: 950px) {
+  @media (max-width: 1150px) {
     flex-direction: column;
   }
 `;
 
 export const StyledGameBoardWrapper = styled.div`
+  z-index: 1;
   position: relative;
 `;
 
@@ -59,10 +61,8 @@ export const StyledCloseInfoButton = styled.div`
     }
   }
 
-  @media (max-width: 950px) {
-    top: -42px;
-    left: -2px;
-    transform: rotate(90deg);
+  @media (max-width: 1150px) {
+    display: none;
   }
 `;
 
@@ -70,44 +70,33 @@ export const StyledGameInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
+  position: absolute;
+  height: 100%;
+  right: 100%;
   gap: 40px 0;
   border: 2px solid #fafafa;
   min-width: 190px;
 
-  &.entering {
-    transform: translateX(0);
-  }
-  &.entered {
-    transform: translateX(100%);
-    transition: all 300ms ease-in-out;
-  }
-  &.exiting {
-    transform: translateX(100%);
-  }
-
-  &.exited {
-    transform: translateX(0);
-    transition: all 300ms ease-in-out;
-  }
-
-  @media (max-width: 950px) {
-    gap: 20px 0;
+  @media (min-width: 1150px) {
     &.entering {
-      transform: translateY(0);
+      transform: translateX(0);
     }
     &.entered {
-      transform: translateY(100%);
+      transform: translateX(100%);
       transition: all 300ms ease-in-out;
     }
     &.exiting {
-      transform: translateY(100%);
+      transform: translateX(100%);
     }
 
     &.exited {
-      transform: translateY(0);
+      transform: translateX(0);
       transition: all 300ms ease-in-out;
     }
+  }
+
+  @media (max-width: 1150px) {
+    position: static;
   }
 `;
 
@@ -119,7 +108,7 @@ export const StyledGameInfoContentContainer = styled.div`
   height: 100%;
   width: 100%;
 
-  @media (max-width: 950px) {
+  @media (max-width: 1150px) {
     gap: 20px 0;
   }
 `;
@@ -132,7 +121,7 @@ export const StyledGameInfoTitleContainer = styled.div`
   justify-content: center;
   padding: 10px 0;
 
-  @media (max-width: 950px) {
+  @media (max-width: 1150px) {
     padding: 5px 0;
   }
 `;
@@ -143,7 +132,7 @@ export const StyledGameInfoTitle = styled.p`
   font-weight: 500;
   letter-spacing: 1.5px;
 
-  @media (max-width: 950px) {
+  @media (max-width: 1150px) {
     font-size: 24px;
   }
 `;
@@ -155,24 +144,9 @@ export const StyledGameBoard = styled.div`
   grid-template-rows: repeat(8, 80px);
   grid-template-columns: repeat(8, 80px);
 
-  @media (max-width: 950px) {
-    grid-template-rows: repeat(8, 70px);
-    grid-template-columns: repeat(8, 70px);
-  }
-
-  @media (max-width: 650px) {
-    grid-template-rows: repeat(8, 50px);
-    grid-template-columns: repeat(8, 50px);
-  }
-
-  @media (max-width: 450px) {
-    grid-template-rows: repeat(8, 40px);
-    grid-template-columns: repeat(8, 40px);
-  }
-
-  @media (max-width: 350px) {
-    grid-template-rows: repeat(8, 35px);
-    grid-template-columns: repeat(8, 35px);
+  @media (max-width: 750px) {
+    grid-template-rows: repeat(8, 60px);
+    grid-template-columns: repeat(8, 60px);
   }
 `;
 
@@ -195,10 +169,6 @@ const StyledCountBox = css`
 
 export const StyledCountBoxValue = styled.p`
   font-size: 30px;
-
-  @media (max-width: 650px) {
-    font-size: 20px;
-  }
 `;
 
 export const StyledCountBlackBox = styled.div<{
@@ -211,15 +181,10 @@ export const StyledCountBlackBox = styled.div<{
 export const StyledCountDisc = styled.div<{
   discColor: "#fff" | "#000";
 }>`
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background-color: ${({ discColor }) => discColor};
-
-  @media (max-width: 650px) {
-    width: 30px;
-    height: 30px;
-  }
 `;
 
 export const StyledCountWhiteBox = styled.div<{
@@ -234,18 +199,6 @@ export const StyledSingleCell = styled.div`
   padding: 8px;
   cursor: pointer;
   border: 1px solid #20b2aa50;
-
-  @media (max-width: 650px) {
-    padding: 4px;
-  }
-
-  @media (max-width: 450px) {
-    padding: 2px;
-  }
-
-  @media (max-width: 350px) {
-    padding: 1px;
-  }
 `;
 
 export const StyledDisc = styled.div<{
@@ -258,7 +211,6 @@ export const StyledDisc = styled.div<{
   background: ${({ status }) => getFieldColorFromStatus(status)};
 
   @media (max-width: 650px) {
-    padding: 4px;
   }
 `;
 
@@ -330,15 +282,6 @@ export const StyledGameResetButton = styled.button`
   :hover {
     background-color: #fafafa;
     color: #21295c;
-  }
-
-  @media (max-width: 950px) {
-    padding: 5px 0;
-    font-size: 24px;
-  }
-
-  @media (max-width: 650px) {
-    font-size: 18px;
   }
 `;
 

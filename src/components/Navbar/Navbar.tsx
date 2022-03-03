@@ -28,9 +28,9 @@ export const Navbar = () => {
   };
 
   return (
-    <StyledWrapper>
-      <Transition in={displayMenu} timeout={300}>
-        {(state) => (
+    <Transition in={displayMenu} timeout={300}>
+      {(state) => (
+        <StyledWrapper>
           <StyledMenuContainer>
             <StyledTitleContainer>
               <StyledTitle to={paths.main}>Othello Game</StyledTitle>
@@ -53,8 +53,8 @@ export const Navbar = () => {
               </StyledMenuLink>
             </StyledLinkContainer>
           </StyledMenuContainer>
-        )}
-      </Transition>
-    </StyledWrapper>
+        </StyledWrapper>
+      )}
+    </Transition>
   );
 };
