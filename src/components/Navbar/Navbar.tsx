@@ -19,6 +19,7 @@ import {
 import { HamburgerIcon } from "../../Icons/HamburgerIcon";
 import { useState } from "react";
 import { Transition } from "react-transition-group";
+import { CloseIcon } from "../../Icons/CloseIcon";
 
 export const Navbar = () => {
   const [displayMenu, setDisplayMenu] = useState(false);
@@ -35,7 +36,7 @@ export const Navbar = () => {
             <StyledTitleContainer>
               <StyledTitle to={paths.main}>Othello Game</StyledTitle>
               <StyledMenuToggleButton onClick={handleMenuToggle}>
-                <HamburgerIcon />
+                {!displayMenu ? <HamburgerIcon /> : <CloseIcon />}
               </StyledMenuToggleButton>
             </StyledTitleContainer>
 

@@ -1,9 +1,5 @@
 import { ReactChildren, useEffect, useState } from "react";
-import {
-  CSSTransition,
-  TransitionGroup,
-  Transition,
-} from "react-transition-group";
+import { Transition } from "react-transition-group";
 
 //game logic
 import { CellStatus, getStatusName, isValidMove } from "../../game/game";

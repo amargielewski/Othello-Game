@@ -8,8 +8,6 @@ export const MainPage = () => {
   const navigate = useNavigate();
   return (
     <StyledWrapper>
-      {/* <StyledPageTitle>Play Game</StyledPageTitle> */}
-      {/* <button onClick={() => navigate(paths.free_ukraine)}>putin huj</button> */}
       <GameBoard />
     </StyledWrapper>
   );

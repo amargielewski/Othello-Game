@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { breakpoints } from "../../constants/breakpoints";
 import {
   CellStatus,
   getFieldColorFromStatus,
@@ -61,7 +62,7 @@ export const StyledCloseInfoButton = styled.div`
     }
   }
 
-  @media (max-width: 1150px) {
+  @media (max-width: ${breakpoints.l}px) {
     display: none;
   }
 `;
@@ -74,10 +75,10 @@ export const StyledGameInfoWrapper = styled.div`
   height: 100%;
   right: 100%;
   gap: 40px 0;
-  border: 2px solid #fafafa;
+  border: 2px solid ${({ theme }) => theme.colors.white};
   min-width: 190px;
 
-  @media (min-width: 1150px) {
+  @media (min-width: ${breakpoints.l}px) {
     &.entering {
       transform: translateX(0);
     }
@@ -95,7 +96,7 @@ export const StyledGameInfoWrapper = styled.div`
     }
   }
 
-  @media (max-width: 1150px) {
+  @media (max-width: ${breakpoints.l}px) {
     position: static;
   }
 `;
@@ -108,7 +109,7 @@ export const StyledGameInfoContentContainer = styled.div`
   height: 100%;
   width: 100%;
 
-  @media (max-width: 1150px) {
+  @media (max-width: ${breakpoints.l}px) {
     gap: 20px 0;
   }
 `;
@@ -144,17 +145,17 @@ export const StyledGameBoard = styled.div`
   grid-template-rows: repeat(8, 80px);
   grid-template-columns: repeat(8, 80px);
 
-  @media (max-width: 750px) {
+  @media (max-width: ${breakpoints.m}px) {
     grid-template-rows: repeat(8, 60px);
     grid-template-columns: repeat(8, 60px);
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: ${breakpoints.s}px) {
     grid-template-rows: repeat(8, 50px);
     grid-template-columns: repeat(8, 50px);
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: ${breakpoints.xs}px) {
     grid-template-rows: repeat(8, 35px);
     grid-template-columns: repeat(8, 35px);
   }
@@ -209,6 +210,10 @@ export const StyledSingleCell = styled.div`
   padding: 8px;
   cursor: pointer;
   border: 1px solid #20b2aa50;
+
+  @media (max-width: ${breakpoints.s}px) {
+    padding: 2px;
+  }
 `;
 
 export const StyledDisc = styled.div<{
@@ -220,7 +225,8 @@ export const StyledDisc = styled.div<{
   padding: 7px;
   background: ${({ status }) => getFieldColorFromStatus(status)};
 
-  @media (max-width: 650px) {
+  @media (max-width: ${breakpoints.s}px) {
+    padding: 3px;
   }
 `;
 

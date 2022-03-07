@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { breakpoints } from "../../constants/breakpoints";
 
 export const StyledWrapper = styled.div`
   display: flex;
   justify-content: center;
   padding: 15px 0;
-
+  position: relative;
   border: 1px solid #fafafa10;
 `;
 
@@ -19,9 +20,6 @@ export const StyledMenuContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   @media (max-width: 650px) {
-    padding: 0 10px;
-    flex-direction: column;
-    gap: 30px 0;
   }
 `;
 
@@ -30,6 +28,10 @@ export const StyledTitle = styled(Link)`
   font-weight: 700;
   text-decoration: none;
   color: #fafafa;
+
+  @media (max-width: ${breakpoints.s}px) {
+    font-size: 30px;
+  } ;
 `;
 
 export const StyledLinkContainer = styled.div<{
@@ -40,7 +42,14 @@ export const StyledLinkContainer = styled.div<{
   gap: 0 50px;
 
   @media (max-width: 650px) {
-    z-index: 1;
+    z-index: 5;
+    position: absolute;
+    padding: 10px 0;
+    left: 0;
+    bottom: -100%;
+    background-color: #21295c;
+    width: 100%;
+    justify-content: center;
     &.entering {
       opacity: 0;
       transform: translateY(-200%);
@@ -78,6 +87,11 @@ export const StyledMenuLink = styled(NavLink)`
   font-weight: 400;
   transition: 0.7s;
 
+  @media (max-width: ${breakpoints.s}px) {
+    font-size: 20px;
+    padding: 5px 10px;
+  }
+
   &.active {
     background-color: #fafafa;
     color: #21295c;
@@ -101,10 +115,10 @@ export const StyledTitleContainer = styled.div`
 `;
 
 export const StyledMenuToggleButton = styled.div`
-  font-size: 40px;
   display: none;
+  font-size: 30px;
 
-  @media (max-width: 650px) {
+  @media (max-width: ${breakpoints.s}px) {
     display: block;
   }
 `;
