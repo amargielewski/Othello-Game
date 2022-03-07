@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/Othello-Game/static/js/main.6a121b28.js",
+    "main.js": "/Othello-Game/static/js/main.3baab1d2.js",
     "static/js/787.a9efc457.chunk.js": "/Othello-Game/static/js/787.a9efc457.chunk.js",
     "index.html": "/Othello-Game/index.html",
-    "main.6a121b28.js.map": "/Othello-Game/static/js/main.6a121b28.js.map",
+    "main.3baab1d2.js.map": "/Othello-Game/static/js/main.3baab1d2.js.map",
     "787.a9efc457.chunk.js.map": "/Othello-Game/static/js/787.a9efc457.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.6a121b28.js"
+    "static/js/main.3baab1d2.js"
   ]
 }
