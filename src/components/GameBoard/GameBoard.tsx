@@ -218,7 +218,7 @@ export const GameBoard = () => {
               )}
               <StyledCountContainer>
                 <StyledCountWhiteBox active={move === 1}>
-                  <StyledCountDisc discColor={"#fff"}></StyledCountDisc>
+                  <StyledCountDisc discColor={"#fafafa"}></StyledCountDisc>
                   <StyledCountBoxValue>{whiteMoves}</StyledCountBoxValue>
                 </StyledCountWhiteBox>
                 <StyledCountBlackBox active={move === 2}>

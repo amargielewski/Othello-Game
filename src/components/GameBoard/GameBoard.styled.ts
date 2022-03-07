@@ -10,7 +10,7 @@ export const StyledWrapper = styled.div`
   position: relative;
   display: flex;
 
-  @media (max-width: 1150px) {
+  @media (max-width: ${breakpoints.l}px) {
     flex-direction: column;
   }
 `;
@@ -26,15 +26,15 @@ export const StyledCloseInfoButton = styled.div`
   left: -42px;
   display: flex;
   justify-content: center;
-  font-size: 24px;
+  font-size: ${({ theme }) => theme.fontSizes.s}px;
   align-items: center;
   width: 40px;
   height: 40px;
-  border: 1px solid #fafafa;
+  border: 1px solid ${({ theme }) => theme.colors.primary_text};
 
   :hover {
-    background-color: #fafafa;
-    color: #21295c;
+    background-color: ${({ theme }) => theme.colors.primary_text};
+    color: ${({ theme }) => theme.colors.primary_background};
   }
 
   &.entering {
@@ -75,7 +75,7 @@ export const StyledGameInfoWrapper = styled.div`
   height: 100%;
   right: 100%;
   gap: 40px 0;
-  border: 2px solid ${({ theme }) => theme.colors.white};
+  border: 2px solid ${({ theme }) => theme.colors.primary_text};
   min-width: 190px;
 
   @media (min-width: ${breakpoints.l}px) {
@@ -115,32 +115,32 @@ export const StyledGameInfoContentContainer = styled.div`
 `;
 
 export const StyledGameInfoTitleContainer = styled.div`
-  background-color: #fafafa;
+  background-color: ${({ theme }) => theme.colors.primary_text};
   width: 100%;
-  color: #21295c;
+  color: ${({ theme }) => theme.colors.primary_background};
   display: flex;
   justify-content: center;
   padding: 10px 0;
 
-  @media (max-width: 1150px) {
+  @media (max-width: ${breakpoints.l}) {
     padding: 5px 0;
   }
 `;
 
 export const StyledGameInfoTitle = styled.p`
-  font-size: 30px;
+  font-size: ${({ theme }) => theme.fontSizes.m}px;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
   letter-spacing: 1.5px;
 
-  @media (max-width: 1150px) {
-    font-size: 24px;
+  @media (max-width: ${breakpoints.l}px) {
+    font-size: ${({ theme }) => theme.fontSizes.s}px;
   }
 `;
 
 export const StyledGameBoard = styled.div`
-  background-color: #21a179;
-  border: 2px solid #fafafa;
+  background-color: ${({ theme }) => theme.colors.secondary_background};
+  border: 2px solid ${({ theme }) => theme.colors.primary_text};
   display: grid;
   grid-template-rows: repeat(8, 80px);
   grid-template-columns: repeat(8, 80px);
@@ -179,7 +179,7 @@ const StyledCountBox = css`
 `;
 
 export const StyledCountBoxValue = styled.p`
-  font-size: 30px;
+  font-size: ${({ theme }) => theme.fontSizes.m}px;
 `;
 
 export const StyledCountBlackBox = styled.div<{
@@ -190,11 +190,11 @@ export const StyledCountBlackBox = styled.div<{
 `;
 
 export const StyledCountDisc = styled.div<{
-  discColor: "#fff" | "#000";
+  discColor: "#fafafa" | "#000";
 }>`
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  border-radius: ${({ theme }) => theme.borderRadius.circle}%;
   background-color: ${({ discColor }) => discColor};
 `;
 
@@ -209,7 +209,7 @@ export const StyledSingleCell = styled.div`
   width: 100%;
   padding: 8px;
   cursor: pointer;
-  border: 1px solid #20b2aa50;
+  border: 1px solid ${({ theme }) => theme.colors.primary_text}10;
 
   @media (max-width: ${breakpoints.s}px) {
     padding: 2px;
@@ -221,7 +221,7 @@ export const StyledDisc = styled.div<{
 }>`
   width: 100%;
   height: 100%;
-  border-radius: 50%;
+  border-radius: ${({ theme }) => theme.borderRadius.circle}%;
   padding: 7px;
   background: ${({ status }) => getFieldColorFromStatus(status)};
 
@@ -235,7 +235,7 @@ export const DiscInner = styled.div<{
 }>`
   width: 100%;
   height: 100%;
-  border-radius: 50%;
+  border-radius: ${({ theme }) => theme.borderRadius.circle}%;
   background: ${({ status }) => getFieldShadowColorFromStatus(status)};
 `;
 
@@ -244,7 +244,7 @@ export const StyledGameBoardModal = styled.div`
   top: 0;
   width: 100%;
   height: 100%;
-  background: #0d3d2ecc;
+  background: ${({ theme }) => theme.colors.secondary_background}b3;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -253,32 +253,35 @@ export const StyledGameBoardModal = styled.div`
 `;
 
 export const StyledGameBoardModalText = styled.p`
-  font-size: 30px;
+  font-size: ${({ theme }) => theme.fontSizes.m}px;
 `;
 
 export const StyledGameBoardModalCaption = styled.p`
-  font-size: 20px;
+  font-size: ${({ theme }) => theme.fontSizes.xs}px;
 `;
 
 export const StyledWinModalText = styled.p`
-  font-weight: 600;
-  font-size: 50px;
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+  font-size: ${({ theme }) => theme.fontSizes.l}px;
   text-transform: capitalize;
+
+  :hover {
+  }
 `;
 
 export const StyledWinModalButton = styled.button`
-  color: #fafafa;
+  color: ${({ theme }) => theme.colors.primary_text};
   padding: 5px 10px;
-  border: 1px solid #fff;
-  font-size: 30px;
+  border: 1px solid ${({ theme }) => theme.colors.white};
+  font-size: ${({ theme }) => theme.fontSizes.m}px;
   cursor: pointer;
   background: transparent;
   border-radius: 8px;
   transition: 0.5s;
 
   :hover {
-    background: white;
-    color: #0d3d2ecc;
+    background: ${({ theme }) => theme.colors.primary_text};
+    color: ${({ theme }) => theme.colors.secondary_background};
   }
 `;
 
@@ -286,24 +289,24 @@ export const StyledGameResetButton = styled.button`
   margin-top: auto;
   background-color: transparent;
   border: none;
-  border-top: 1px solid #fafafa;
-  color: #fafafa;
+  border-top: 1px solid ${({ theme }) => theme.colors.primary_text};
+  color: ${({ theme }) => theme.colors.primary_text};
   cursor: pointer;
   width: 100%;
-  font-weight: 500;
-  font-size: 30px;
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  font-size: ${({ theme }) => theme.fontSizes.m}px;
   transition: 0.5s;
   padding: 15px 0;
 
   :hover {
-    background-color: #fafafa;
+    background-color: ${({ theme }) => theme.colors.primary_text};
     color: #21295c;
   }
 `;
 
 export const StyledGameWinnerText = styled.p`
-  font-size: 30px;
+  font-size: ${({ theme }) => theme.fontSizes.m}px;
   text-transform: capitalize;
-  font-weight: 500;
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
   letter-spacing: 1.2px;
 `;

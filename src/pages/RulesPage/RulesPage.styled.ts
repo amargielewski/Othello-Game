@@ -17,9 +17,9 @@ export const StyledRulesListContainer = styled.div`
 export const StyledRuleTitle = styled.p`
   align-self: center;
   text-transform: uppercase;
-  font-size: 40px;
+  font-size: ${({ theme }) => theme.fontSizes.m}px;
   letter-spacing: 3px;
-  font-weight: 500;
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
 `;
 
 export const StyledRuleItem = styled.div`
@@ -33,7 +33,7 @@ export const StyledRuleItem = styled.div`
     content: "";
     width: 100%;
     height: 1px;
-    background: #fafafa33;
+    background: ${({ theme }) => theme.colors.primary_text}33;
     bottom: -10px;
   }
 `;
@@ -41,14 +41,14 @@ export const StyledRuleItem = styled.div`
 export const StyledRuleText = styled.p`
   font-size: 25px;
   letter-spacing: 1.1px;
-  font-weight: 300;
+  font-weight: ${({ theme }) => theme.fontWeights.light};
 `;
 
 export const StyledRuleNumber = styled.p`
-  font-size: 25px;
+  font-size: ${({ theme }) => theme.fontSizes.s}px;
 `;
 
 export const StyledGameObjectText = styled.p`
   align-self: center;
-  font-size: 25px;
+  font-size: ${({ theme }) => theme.fontSizes.s}px;
 `;
